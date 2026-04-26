@@ -319,7 +319,7 @@ def send_email(html_content):
     msg = MIMEMultipart("alternative")
     msg["From"] = SENDER_EMAIL
     msg["To"] = RECEIVER_EMAIL
-    msg["Subject"] = "📡 Daily Website Status Report"
+    msg["Subject"] = "New Daily Website Status Report"
 
     # Fallback plain-text part
     plain = "Website Status Report\nCheck your email client for the full HTML report."
