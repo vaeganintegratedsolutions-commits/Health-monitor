@@ -26,7 +26,7 @@ def check_sites():
             if r.status_code == 200:
                 status = "ONLINE"
                 status_class = "online"
-                badge = "✅"
+                badge = "✅git "
             else:
                 status = f"CODE {r.status_code}"
                 status_class = "warning"
@@ -62,7 +62,7 @@ def build_html_report(results):
         <tr>
           <td class="site-name">{r['name']}</td>
           <td class="site-url"><a href="{r['url']}">{r['url']}</a></td>
-          <td><span class="badge {r['status_class']}">{r['badge']} {r['status']}</span></td>
+          <td><span class="badge {r['status_class']}"><span class="dot"></span>{r['status']}</span></td>
           <td class="response-time">{r['response_time']}</td>
         </tr>"""
 
@@ -132,13 +132,12 @@ def build_html_report(results):
     background: #161b22;
     border: 1px solid #30363d;
     border-top: none;
-    padding: 20px 36px;
+    padding: 20px 0;
     display: flex;
-    gap: 32px;
     border-bottom: 1px solid #21262d;
   }}
 
-  .stat {{ text-align: center; }}
+  .stat {{ text-align: center; flex: 1; padding: 0 24px; }}
 
   .stat-value {{
     font-size: 28px;
@@ -232,7 +231,7 @@ def build_html_report(results):
   .badge {{
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 11.5px;
@@ -241,9 +240,18 @@ def build_html_report(results):
     white-space: nowrap;
   }}
 
+  .badge .dot {{
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }}
+
   .badge.online  {{ background: rgba(63,185,80,.15);  color: #3fb950; border: 1px solid rgba(63,185,80,.3);  }}
   .badge.warning {{ background: rgba(210,153,34,.15); color: #d29922; border: 1px solid rgba(210,153,34,.3); }}
   .badge.down    {{ background: rgba(248,81,73,.15);  color: #f85149; border: 1px solid rgba(248,81,73,.3);  }}
+  .badge.online .dot  {{ background: #3fb950; }}
+  .badge.warning .dot {{ background: #d29922; }}
+  .badge.down .dot    {{ background: #f85149; }}
 
   /* ── Footer ── */
   .footer {{
@@ -319,7 +327,7 @@ def send_email(html_content):
     msg = MIMEMultipart("alternative")
     msg["From"] = SENDER_EMAIL
     msg["To"] = RECEIVER_EMAIL
-    msg["Subject"] = "New Daily Website Status Report"
+    msg["Subject"] = "Daily Website Status Report"
 
     # Fallback plain-text part
     plain = "Website Status Report\nCheck your email client for the full HTML report."
