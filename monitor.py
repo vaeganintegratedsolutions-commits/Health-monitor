@@ -1,7 +1,7 @@
 import requests
 import smtplib
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -50,7 +50,8 @@ def check_sites():
 
 
 def build_html_report(results):
-    now = datetime.utcnow().strftime("%B %d, %Y  •  %H:%M UTC")
+    ist_now = datetime.utcnow() + timedelta(hours=5, minutes=30)
+    now = ist_now.strftime("%B %d, %Y  •  %H:%M IST")
     total = len(results)
     online = sum(1 for r in results if r["status_class"] == "online")
     down = sum(1 for r in results if r["status_class"] == "down")
