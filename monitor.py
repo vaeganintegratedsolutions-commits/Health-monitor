@@ -63,7 +63,7 @@ def build_html_report(results):
         <tr>
           <td class="site-name">{r['name']}</td>
           <td class="site-url"><a href="{r['url']}">{r['url']}</a></td>
-          <td><span class="badge {r['status_class']}"><span class="dot"></span>{r['status']}</span></td>
+          <td><span class="badge {r['status_class']}">{r['status']}</span></td>
           <td class="response-time">{r['response_time']}</td>
         </tr>"""
 
@@ -102,16 +102,7 @@ def build_html_report(results):
   .header-top {{
     display: flex;
     align-items: center;
-    gap: 14px;
     margin-bottom: 6px;
-  }}
-
-  .pulse {{
-    width: 10px; height: 10px;
-    background: #3fb950;
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(63,185,80,.25);
-    flex-shrink: 0;
   }}
 
   h1 {{
@@ -125,7 +116,7 @@ def build_html_report(results):
     font-size: 12px;
     color: #8b949e;
     font-family: 'IBM Plex Mono', monospace;
-    margin-left: 24px;
+    margin-left: 0px;
   }}
 
   /* ── Summary cards ── */
@@ -241,18 +232,9 @@ def build_html_report(results):
     white-space: nowrap;
   }}
 
-  .badge .dot {{
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }}
-
   .badge.online  {{ background: rgba(63,185,80,.15);  color: #3fb950; border: 1px solid rgba(63,185,80,.3);  }}
   .badge.warning {{ background: rgba(210,153,34,.15); color: #d29922; border: 1px solid rgba(210,153,34,.3); }}
   .badge.down    {{ background: rgba(248,81,73,.15);  color: #f85149; border: 1px solid rgba(248,81,73,.3);  }}
-  .badge.online .dot  {{ background: #3fb950; }}
-  .badge.warning .dot {{ background: #d29922; }}
-  .badge.down .dot    {{ background: #f85149; }}
 
   /* ── Footer ── */
   .footer {{
@@ -269,7 +251,7 @@ def build_html_report(results):
 
   <div class="header">
     <div class="header-top">
-      <div class="pulse"></div>
+
       <h1>Website Status Report</h1>
     </div>
     <div class="subtitle">Generated {now}</div>
