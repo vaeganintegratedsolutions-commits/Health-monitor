@@ -2,28 +2,33 @@ name: Daily Website Check
 
 on:
   schedule:
-    # This runs every day at 00:00 UTC (5:30 AM IST)
     - cron: '0 0 * * *'
-  workflow_dispatch: # This adds a "Run" button so you can test it manually
+  workflow_dispatch:
 
 jobs:
   monitor:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+    
+    # This solves the warning by opting into the new Node.js 24 runner
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+    steps:
+      # Updated to v4 (still valid with the env var above)
+      - name: Checkout Repository
+        uses: actions/checkout@v4 
+
+      # Updated to v5 (supports newer Node versions natively)
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: pip install requests
 
       - name: Run Monitor Script
         env:
-          # This maps your GitHub Secrets to the Python Environment Variables
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
