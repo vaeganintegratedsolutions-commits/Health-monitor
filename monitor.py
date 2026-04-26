@@ -13,7 +13,6 @@ RECEIVER_EMAIL = os.environ.get("EMAIL_RECEIVER")
 websites = {
     "Mango_Meadows": "https://mangomeadows.vaeganapps.com",
     "RR_Enterprise": "https://rr-enterprise1.vercel.app",
-    "Mahesh_Saravanan": "https://mahesh-saravanan.com",
     "Gitea": "https://git.vaeganapps.com",
 }
 
