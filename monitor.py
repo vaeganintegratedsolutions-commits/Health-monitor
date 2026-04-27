@@ -27,9 +27,9 @@ def check_sites():
                 status_class = "online"
                 badge = "✅git "
             else:
-                status = f"CODE {r.status_code}"
-                status_class = "warning"
-                badge = "⚠️"
+                status = "DOWN"
+                status_class = "down"
+                badge = "❌"
             response_time = round(r.elapsed.total_seconds() * 1000)
         except Exception:
             status = "DOWN"
@@ -54,7 +54,6 @@ def build_html_report(results):
     total = len(results)
     online = sum(1 for r in results if r["status_class"] == "online")
     down = sum(1 for r in results if r["status_class"] == "down")
-    warn = total - online - down
 
     rows = ""
     for r in results:
@@ -147,7 +146,6 @@ def build_html_report(results):
 
   .stat-value.green  {{ color: #3fb950; }}
   .stat-value.red    {{ color: #f85149; }}
-  .stat-value.yellow {{ color: #d29922; }}
   .stat-value.muted  {{ color: #8b949e; }}
 
   .divider {{ width: 1px; background: #30363d; }}
@@ -232,7 +230,6 @@ def build_html_report(results):
   }}
 
   .badge.online  {{ background: rgba(63,185,80,.15);  color: #3fb950; border: 1px solid rgba(63,185,80,.3);  }}
-  .badge.warning {{ background: rgba(210,153,34,.15); color: #d29922; border: 1px solid rgba(210,153,34,.3); }}
   .badge.down    {{ background: rgba(248,81,73,.15);  color: #f85149; border: 1px solid rgba(248,81,73,.3);  }}
 
   /* ── Footer ── */
@@ -265,11 +262,6 @@ def build_html_report(results):
     <div class="stat">
       <div class="stat-value green">{online}</div>
       <div class="stat-label">Online</div>
-    </div>
-    <div class="divider"></div>
-    <div class="stat">
-      <div class="stat-value yellow">{warn}</div>
-      <div class="stat-label">Warning</div>
     </div>
     <div class="divider"></div>
     <div class="stat">
