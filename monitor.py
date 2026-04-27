@@ -27,7 +27,7 @@ def check_sites():
                 status_class = "online"
                 badge = "✅git "
             else:
-                status = "DOWN"
+                status = f"DOWN ({r.status_code})"
                 status_class = "down"
                 badge = "❌"
             response_time = round(r.elapsed.total_seconds() * 1000)
