@@ -14,6 +14,7 @@ websites = {
     "Mango_Meadows": "https://mangomeadows.vaeganapps.com",
     "RR_Enterprise": "https://rr-enterprise1.vercel.app",
     "Gitea": "https://git.vaeganapps.com",
+    "VIS":"https://www.vaeganapps.com",
 }
 
 
